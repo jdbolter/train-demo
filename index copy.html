@@ -35,23 +35,20 @@
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
         <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
-  
-       <a-animation 
-        attribute="visible" 
-                id="theaterGone"
-                delay="15500"
-                 to="false"
-                begin= "four" 
-      >  
-       </a-animation>   
-  
-   <!--    <a-animation  
-               attribute="theater-mtl.opacity" 
+	    <a-animation
+       attribute="visible"
+         	   id="theaterGone"
+               delay="15500"
+			          to="false"
+               begin= "four" 
+               attribute="material.opacity" 
                 begin="four" 
                id="theaterGone"
                 delay="15500"
                 to="0" 
-      > </a-animation>  -->
+  
+      >
+        </a-animation>
 
       </a-entity>
 
