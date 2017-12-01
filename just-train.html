@@ -48,14 +48,21 @@
       </a-assets>
 
       <!-- Using the asset management system. -->
-      <a-entity shadow="cast: true, receive: true" rotation="0 0 0" scale="0.4 0.4 0.4" position="0 0 0">
+      <a-entity id ="train" shadow="cast: true, receive: true" rotation="0 -30 0" scale="0.3 0.3 0.3" position="30 -3 -60">
 				<a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 				<a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 				
 				<a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 				
 				<a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-
+        <a-animation
+        id="trainAnimation"
+        attribute="position"
+         easing= "ease-out-expo"
+         to="0 0 0"
+         dur="41000"
+         begin= "3000"
+        ></a-animation>
 			</a-entity>	  
     </a-scene>
 
