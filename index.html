@@ -22,19 +22,49 @@
     <ar-scene desiredreality="src:url(resources/reality/panorama/index.html);"  panorama__trainyard="src:url(trainyard.jpg);lla:-84.3951 33.7634 206;initial:true;">
 
       <a-assets>
-        <a-asset-item id="theater-obj" src="Theatre Whole.obj"></a-asset-item>
-        <a-asset-item id="theater-mtl" src="Theatre Whole.mtl"></a-asset-item>
+        <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
+        <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
+        <video id="train-video" src="assets/train-video.mp4" playsinline></video>
+        <!-- see in old or unused assets  
         <a-asset-item id="train-obj" src="trainengine.obj"></a-asset-item>
-        <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item>
-		<a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
-		<a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item>
-        <video id="train-video" autoplay loop="true" src="train-video.mp4" playsinline></video>
+        <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item> 
+        <a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
+        <a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item> -->
       </a-assets>
+
+      <!--The Train model in parts -->
+      <a-assets>
+      <a-asset-item id="objectWheels" src="assets/models/trainWheels.obj"></a-asset-item>
+      <a-asset-item id="objectCab" src="assets/models/trainCab.obj"></a-asset-item>
+      <a-asset-item id="objectBase" src="assets/models/trainBase.obj"></a-asset-item>
+      <a-asset-item id="objectBoiler" src="assets/models/trainBoiler.obj"></a-asset-item>
+      <img id="wheelColor" src="assets/textures/WheelsCapTexture_baseColor.jpg" />
+      <img id="wheelBmp" src="assets/textures/WheelsCapTexture_normal.png" />
+      <img id="wheelAO" src="assets/textures/WheelsCapTexture_occ.jpg" />
+      <img id="lightsColor" src="assets/textures/lightsHubsTexture_baseColor.jpg" />
+      <img id="lightsBmp" src="assets/textures/lightsHubsTexture_normal.png" />
+      <img id="lightsAO" src="assets/textures/lightsHubsTexture_occ.jpg" />
+      <img id="boilerColor" src="assets/textures/boilerTexture_baseColor.jpg" />
+      <img id="boilerBmp" src="assets/textures/boilerTexture_normal.png" />
+      <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
+      <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
+      </a-assets>
+
+      <!-- Using the asset management system. -->
+     <a-entity id="train-obj" rotation="0 -30 0" shadow="cast: true, receive: true">
+      <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+      <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+      
+      <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+      
+      <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+      </a-entity>
 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
         <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
+<<<<<<< HEAD
   
        <a-animation 
         attribute="visible" 
@@ -53,12 +83,21 @@
                 to="0" 
       > </a-animation>  -->
 
+=======
+	    <a-animation
+		       attribute="visible"
+         	  id="theaterGone"
+            delay="15500"
+			      to="false"
+            begin= "four"
+          ></a-animation>
+>>>>>>> b6d1707708a0973760410d024fd5e0dfa33cd1d0
       </a-entity>
 
-      <a-entity>
+      <a-entity position="25 -20 -75>
         <!-- <a-box id="train" position="10 0.5 30" rotation="0 45 0" width="10" height="10" depth="10"  color="#4CC3D9"></a-box> -->
-        <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.4 0.4 0.4" position="25 -2 -75">
-        </a-obj-model>
+      <!--  <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.1 0.1 0.1" position="25 -2 -75"> -->
+          <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.1 0.1 0.1" position="25 -20 -75">         </a-obj-model>
          <a-animation
          	   id="trainAnimation"
          	   attribute="position"
@@ -69,6 +108,7 @@
                dur="21000"
                begin= "one"
           ></a-animation>
+
       </a-entity>
 	  
 	  
