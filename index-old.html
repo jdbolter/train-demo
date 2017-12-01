@@ -24,41 +24,12 @@
       <a-assets>
         <a-asset-item id="theater-obj" src="Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="Theatre Whole.mtl"></a-asset-item>
-       <!-- <a-asset-item id="train-obj" src="trainengine.obj"></a-asset-item>
-        <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item>-->
-		  <a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
-		  <a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item>
+        <a-asset-item id="train-obj" src="trainengine.obj"></a-asset-item>
+        <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item>
+		<a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
+		<a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item>
         <video id="train-video" autoplay loop="true" src="train-video.mp4" playsinline></video>
       </a-assets>
-
-
-      <a-assets>
-      <a-asset-item id="objectWheels" src="models/trainWheels.obj"></a-asset-item>
-      <a-asset-item id="objectCab" src="models/trainCab.obj"></a-asset-item>
-      <a-asset-item id="objectBase" src="models/trainBase.obj"></a-asset-item>
-      <a-asset-item id="objectBoiler" src="models/trainBoiler.obj"></a-asset-item>
-      <img id="wheelColor" src="textures/WheelsCapTexture_baseColor.jpg" />
-      <img id="wheelBmp" src="textures/WheelsCapTexture_normal.png" />
-      <img id="wheelAO" src="textures/WheelsCapTexture_occ.jpg" />
-      <img id="lightsColor" src="textures/lightsHubsTexture_baseColor.jpg" />
-      <img id="lightsBmp" src="textures/lightsHubsTexture_normal.png" />
-      <img id="lightsAO" src="textures/lightsHubsTexture_occ.jpg" />
-      <img id="boilerColor" src="textures/boilerTexture_baseColor.jpg" />
-      <img id="boilerBmp" src="textures/boilerTexture_normal.png" />
-      <img id="boilerAO" src="textures/boilerTexture_occ.jpg" />
-      <img id="reflectMap" src="textures/reflectSphere.jpg" />
-
-      </a-assets>
-
-      <!-- Using the asset management system. -->
-     <a-entity id="train-obj" rotation="0 -30 0" shadow="cast: true, receive: true">
-      <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      
-      <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      
-      <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      </a-entity>
 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
