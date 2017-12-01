@@ -3,7 +3,8 @@
     <title>Theater Disaster</title>
     <meta name="description" content="Panoramas and Cursors">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <script src="resources/aframe.js"></script>
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+  <!--  <script src="resources/aframe.js"></script> -->
     <script src="resources/argon.min.js"></script>
  <!--   <script src="resources/aframe-particle-system-component.min.js"></script> -->
     <script src="resources/build.js"></script>
@@ -51,7 +52,7 @@
       </a-assets>
 
       <!-- Using the asset management system. -->
-     <a-entity id="train-obj" rotation="0 -30 0" shadow="cast: true, receive: true">
+     <a-entity id="train-obj" shadow="cast: true, receive: true" rotation="0 0 0" scale="0.4 0.4 0.4" position="21 -2 -75">>
       <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
       <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
       
@@ -64,26 +65,6 @@
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
         <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
-<<<<<<< HEAD
-  
-       <a-animation 
-        attribute="visible" 
-                id="theaterGone"
-                delay="15500"
-                 to="false"
-                begin= "four" 
-      >  
-       </a-animation>   
-  
-   <!--    <a-animation  
-               attribute="theater-mtl.opacity" 
-                begin="four" 
-               id="theaterGone"
-                delay="15500"
-                to="0" 
-      > </a-animation>  -->
-
-=======
 	    <a-animation
 		       attribute="visible"
          	  id="theaterGone"
@@ -91,13 +72,11 @@
 			      to="false"
             begin= "four"
           ></a-animation>
->>>>>>> b6d1707708a0973760410d024fd5e0dfa33cd1d0
       </a-entity>
 
       <a-entity position="25 -20 -75>
         <!-- <a-box id="train" position="10 0.5 30" rotation="0 45 0" width="10" height="10" depth="10"  color="#4CC3D9"></a-box> -->
       <!--  <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.1 0.1 0.1" position="25 -2 -75"> -->
-          <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.1 0.1 0.1" position="25 -20 -75">         </a-obj-model>
          <a-animation
          	   id="trainAnimation"
          	   attribute="position"
@@ -151,13 +130,14 @@
 
       // the ar-camera has an argon reference frame attached, so when it gets its first value,
       // we'll get this event
-      arScene.addEventListener("referenceframe-statuschanged", function () {
-        var camera = document.querySelector('ar-camera');
-        var vec = camera.object3D.getWorldDirection();
-        vec.multiplyScalar(-10);
-        vec.y -= 1;
-        content.setAttribute("position", {x: vec.x, y: vec.y, z: vec.z});
-      });
+     // arScene.addEventListener("referenceframe-statuschanged", function () {
+     //   var camera = document.querySelector('ar-camera');
+     //   var vec = camera.object3D.getWorldDirection();
+     //   vec.multiplyScalar(-10);
+     //   vec.y -= 1;
+     //   content.setAttribute("position", {x: vec.x, y: vec.y, z: vec.z});
+     //  });  
+
       // train.on('click', animate);
       // function animate () {
       // 	var train = d3.select(this);

@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Theater Disaster</title>
+    <meta name="description" content="Panoramas and Cursors">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <script src="resources/argon.min.js"></script>
+ <!--   <script src="resources/aframe-particle-system-component.min.js"></script> -->
+    <script src="resources/build.js"></script>
+   <script src="resources/CSS3DArgonRenderer.js"></script>
+    <script src="resources/CSS3DArgonHUD.js"></script>  
+    <script src="resources/aframe-look-at-component.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+
+  </head>
+
+  <body>
+    <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+      <a-assets>
+        <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
+        <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
+        <video id="train-video" src="assets/train-video.mp4" playsinline></video>
+        <!-- see in old or unused assets  
+        <a-asset-item id="train-obj" src="trainengine.obj"></a-asset-item>
+        <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item> 
+        <a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
+        <a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item> -->
+      </a-assets>
+
+      <!--The Train model in parts -->
+      <a-assets>
+      <a-asset-item id="objectWheels" src="assets/models/trainWheels.obj"></a-asset-item>
+      <a-asset-item id="objectCab" src="assets/models/trainCab.obj"></a-asset-item>
+      <a-asset-item id="objectBase" src="assets/models/trainBase.obj"></a-asset-item>
+      <a-asset-item id="objectBoiler" src="assets/models/trainBoiler.obj"></a-asset-item>
+      <img id="wheelColor" src="assets/textures/WheelsCapTexture_baseColor.jpg" />
+      <img id="wheelBmp" src="assets/textures/WheelsCapTexture_normal.png" />
+      <img id="wheelAO" src="assets/textures/WheelsCapTexture_occ.jpg" />
+      <img id="lightsColor" src="assets/textures/lightsHubsTexture_baseColor.jpg" />
+      <img id="lightsBmp" src="assets/textures/lightsHubsTexture_normal.png" />
+      <img id="lightsAO" src="assets/textures/lightsHubsTexture_occ.jpg" />
+      <img id="boilerColor" src="assets/textures/boilerTexture_baseColor.jpg" />
+      <img id="boilerBmp" src="assets/textures/boilerTexture_normal.png" />
+      <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
+      <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
+      </a-assets>
+
+      <!-- Using the asset management system. -->
+      <a-entity shadow="cast: true, receive: true" rotation="0 0 0" scale="0.4 0.4 0.4" position="0 0 0">
+				<a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+				<a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+				
+				<a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+				
+				<a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+
+			</a-entity>	  
+    </a-scene>
+
+
+
+
+    <
+  </body>
+</html>
