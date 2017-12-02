@@ -20,47 +20,54 @@
   <body>
 
     <div id="menu" class="menu"></div>
-    <ar-scene desiredreality="src:url(resources/reality/panorama/index.html);"  panorama__trainyard="src:url(trainyard.jpg);lla:-84.3951 33.7634 206;initial:true;">
+    <ar-scene desiredreality="src:url(resources/reality/panorama/index.html);"  panorama__trainyard="src:url(assets/trainyard.jpg);lla:-84.3951 33.7634 206;initial:true;">
 
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
         <video id="train-video" src="assets/train-video.mp4" playsinline></video>
-        <!-- see in old or unused assets  
-        <a-asset-item id="train-obj" src="trainengine.obj"></a-asset-item>
-        <a-asset-item id="train-mtl" src="trainengine.mtl"></a-asset-item> 
-        <a-asset-item id="theaterCrash-obj" src="Theatre Crash.obj"></a-asset-item>
-        <a-asset-item id="theaterCrash-mtl" src="Theatre Crash.mtl"></a-asset-item> -->
       </a-assets>
 
       <!--The Train model in parts -->
       <a-assets>
-      <a-asset-item id="objectWheels" src="assets/models/trainWheels.obj"></a-asset-item>
-      <a-asset-item id="objectCab" src="assets/models/trainCab.obj"></a-asset-item>
-      <a-asset-item id="objectBase" src="assets/models/trainBase.obj"></a-asset-item>
-      <a-asset-item id="objectBoiler" src="assets/models/trainBoiler.obj"></a-asset-item>
-      <img id="wheelColor" src="assets/textures/WheelsCapTexture_baseColor.jpg" />
-      <img id="wheelBmp" src="assets/textures/WheelsCapTexture_normal.png" />
-      <img id="wheelAO" src="assets/textures/WheelsCapTexture_occ.jpg" />
-      <img id="lightsColor" src="assets/textures/lightsHubsTexture_baseColor.jpg" />
-      <img id="lightsBmp" src="assets/textures/lightsHubsTexture_normal.png" />
-      <img id="lightsAO" src="assets/textures/lightsHubsTexture_occ.jpg" />
-      <img id="boilerColor" src="assets/textures/boilerTexture_baseColor.jpg" />
-      <img id="boilerBmp" src="assets/textures/boilerTexture_normal.png" />
-      <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
-      <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
+        <a-asset-item id="objectWheels" src="assets/models/trainWheels.obj"></a-asset-item>
+        <a-asset-item id="objectCab" src="assets/models/trainCab.obj"></a-asset-item>
+        <a-asset-item id="objectBase" src="assets/models/trainBase.obj"></a-asset-item>
+        <a-asset-item id="objectBoiler" src="assets/models/trainBoiler.obj"></a-asset-item>
+        <img id="wheelColor" src="assets/textures/WheelsCapTexture_baseColor.jpg" />
+        <img id="wheelBmp" src="assets/textures/WheelsCapTexture_normal.png" />
+        <img id="wheelAO" src="assets/textures/WheelsCapTexture_occ.jpg" />
+        <img id="lightsColor" src="assets/textures/lightsHubsTexture_baseColor.jpg" />
+        <img id="lightsBmp" src="assets/textures/lightsHubsTexture_normal.png" />
+        <img id="lightsAO" src="assets/textures/lightsHubsTexture_occ.jpg" />
+        <img id="boilerColor" src="assets/textures/boilerTexture_baseColor.jpg" />
+        <img id="boilerBmp" src="assets/textures/boilerTexture_normal.png" />
+        <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
+        <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
       </a-assets>
 
       <!-- Using the asset management system. -->
-     <a-entity id="train-obj" shadow="cast: true, receive: true" rotation="0 0 0" scale="0.4 0.4 0.4" position="21 -2 -75">>
-      <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      
-      <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-      
-      <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+      <a-entity id="train" shadow="cast: true, receive: true" rotation="0 -30 0" scale="0.3 0.3 0.3" position="30 -3 -60">
+        <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+        <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+
+        <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+
+        <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+        <!-- Train animation -->
+        <a-animation
+        id="trainAnimation"
+        attribute="position"
+         easing= "ease-out-expo"
+         delay="4125"
+         from= "1005 -2 -975"
+         to="0 0 0"
+         dur="21000"
+         begin= "trainStart"
+        ></a-animation>
       </a-entity>
 
+      <!--THe theater box itself goes invisible on the "theaterGone" signal --> 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
@@ -68,52 +75,13 @@
 	    <a-animation
 		       attribute="visible"
          	  id="theaterGone"
-            delay="15500"
+            delay="30000"
 			      to="false"
-            begin= "four"
-          ></a-animation>
-      </a-entity>
-
-      <a-entity position="25 -20 -75>
-        <!-- <a-box id="train" position="10 0.5 30" rotation="0 45 0" width="10" height="10" depth="10"  color="#4CC3D9"></a-box> -->
-      <!--  <a-obj-model id="train" src="#train-obj" rotation="-90 0 40" scale="0.1 0.1 0.1" position="25 -2 -75"> -->
-         <a-animation
-         	   id="trainAnimation"
-         	   attribute="position"
-               easing= "ease-out-expo"
-               delay="4125"
-               from= "1005 -2 -975"
-               to="-70 -2 100"
-               dur="21000"
-               begin= "one"
-          ></a-animation>
-
-      </a-entity>
-	  
-	  
-	    <a-entity visible="false">
-        <a-obj-model id="trainHole" src="#theaterCrash-obj" mtl="#theaterCrash-mtl" rotation="-90 -30 0" scale="2 2 2" position="-19 -32 62">
-        </a-obj-model>
-         <a-animation
-		       attribute="visible"
-         	   id="trainHoleAnimation"
-               delay="11750"
-			   to="true"
-               begin= "two"
-			   
-          ></a-animation>
-		   <a-animation
-		       attribute="visible"
-         	   id="trainHoleAnimation2"
-               delay="15500"
-			   to="false"
-               begin= "three"
-			   
+            begin= "theaterGone"
           ></a-animation>
       </a-entity>
 	  
     </ar-scene>
-
 
 
 
@@ -126,7 +94,7 @@
       var arScene = document.querySelector('ar-scene');
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
-	  var hole = document.querySelector('#trainHole');
+	
 
       // the ar-camera has an argon reference frame attached, so when it gets its first value,
       // we'll get this event
@@ -157,10 +125,8 @@
       button.addEventListener('click', function () {
           const videoElement = document.querySelector("#train-video");
           videoElement.play();
-          train.emit('one');
-		  hole.emit('two');
-		  hole.emit('three');
-		  content.emit('four');
+          train.emit('trainStart');
+		      content.emit('theaterGone');
       //    arScene.sceneEl.emit('showpanorama', { name: panoramas[0].name });
       //    content.setAttribute('visible', false);
 	//	  hole.aet
