@@ -17,7 +17,8 @@
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
-        <video id="train-video" src="assets/train-video.mp4" playsinline></video>
+        <video id="train-video" src="assets/train-video.mp4" playsinline></video>   
+        <audio id="narration" src="assets/narration.m4a" ></audio> 
         <img id="trainyardPano" src="assets/malmo.jpg">
       </a-assets>
 
@@ -54,7 +55,7 @@
         id="trainAnimation"
         attribute="position"
          easing= "ease-out-expo"
-         delay="14000"
+         delay="13000"
          to="0 0 -10"
          begin=""
          dur="300"
@@ -90,6 +91,9 @@
       var content = document.querySelector('#theaterworld');
       videoElement = document.querySelector("#train-video");
       videoElement.play();
+      videoElement.volume = 0.05;
+      audioElement = document.querySelector("#narration");
+      audioElement.play();
       train.emit('trainStart');
 		  content.emit('theaterGone');
 
