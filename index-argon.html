@@ -4,6 +4,14 @@
     <meta name="description" content="Panoramas and Cursors">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/argonjs/argon/develop/dist/argon.js"></script>
+   <script src="resources/build.js"></script>
+   <script src="https://samples-develop.argonjs.io/resources/lib/CSS3DArgonRenderer.js"></script>
+   <script src="https://samples-develop.argonjs.io/resources/lib/CSS3DArgonHUD.js"></script>
+
+    <script src="resources/aframe-look-at-component.js"></script>
+<!--  <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script> -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="resources/style.css">
 
   </head>
@@ -11,13 +19,12 @@
   <body>
 
     <div id="menu" class="menu"></div>
-    <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
-  
+    <ar-scene desiredreality="src:url(resources/reality/panorama/index.html);"  panorama__trainyard="src:url(assets/malmo.jpg);lla:-84.3951 33.7634 206;initial:true;">
+
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
         <video id="train-video" src="assets/train-video.mp4" playsinline></video>
-        <img id="trainyardPano" src="assets/malmo.jpg">
       </a-assets>
 
       <!--The Train model in parts -->
@@ -38,10 +45,8 @@
         <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
       </a-assets>
 
-      <a-sky src="#trainyardPano"></a-sky>
-
       <!-- Using the asset management system. -->
-      <a-entity id="train" shadow="cast: true, receive: true" rotation="10 -45 0" scale="0.4 0.4 0.4" position="15 5 -50">
+      <a-entity id="train" shadow="cast: true, receive: true" rotation="5 -45 0" scale="0.4 0.4 0.4" position="15 6 -50">
         <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
@@ -53,10 +58,10 @@
         id="trainAnimation"
         attribute="position"
          easing= "ease-out-expo"
-         delay="13500"
-         to="-10 0 0"
-         begin=""
+         delay="12000"
+         to="-10 -4 0"
          dur="21000"
+         begin= "trainStart"
         ></a-animation>
       </a-entity>
 
@@ -70,11 +75,11 @@
          	  id="theaterGone"
             delay="30000"
 			      to="false"
-            begin= ""
+            begin= "theaterGone"
           ></a-animation>
       </a-entity>
 	  
-    </a-scene>
+    </ar-scene>
 
 
 
@@ -84,13 +89,11 @@
       { text: 'Nemo', name: 'aqui-nemo' }
     ];
 
-     /* var arScene = document.querySelector('ar-scene'); */
+      var arScene = document.querySelector('ar-scene');
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
-      videoElement = document.querySelector("#train-video");
-      videoElement.play();
-      train.emit('trainStart');
-		  content.emit('theaterGone');
+	
+
       // the ar-camera has an argon reference frame attached, so when it gets its first value,
       // we'll get this event
      // arScene.addEventListener("referenceframe-statuschanged", function () {
@@ -145,15 +148,15 @@
         }
       });
 
-   //  arScene.addEventListener('argon-initialized', function(evt) {
-     //   arScene.sceneEl.hud.appendChild(menu);
-       // arScene.sceneEl.argonApp.focusEvent.addEventListener(function () {
-   //         document.getElementById('menu').style.display = 'block';
-    //    });
-     //   arScene.sceneEl.argonApp.blurEvent.addEventListener(function () {
-      //      document.getElementById('menu').style.display = 'none';
-      //  });
-    //  });
+      arScene.addEventListener('argon-initialized', function(evt) {
+        arScene.sceneEl.hud.appendChild(menu);
+        arScene.sceneEl.argonApp.focusEvent.addEventListener(function () {
+            document.getElementById('menu').style.display = 'block';
+        });
+        arScene.sceneEl.argonApp.blurEvent.addEventListener(function () {
+            document.getElementById('menu').style.display = 'none';
+        });
+      });
     </script>
   </body>
 </html>
