@@ -57,7 +57,7 @@
          easing= "ease-out-expo"
          delay="13000"
          to="0 0 -10"
-         begin=""
+         begin="trainStart"
          dur="300"
         ></a-animation>
       </a-entity>
@@ -72,7 +72,7 @@
          	  id="theaterGone"
             delay="30000"
 			      to="false"
-            begin= ""
+            begin= "theaterGone"
           ></a-animation> 
       </a-entity>
 	  
@@ -81,30 +81,23 @@
 
 
     <script>
-    var panoramas = [
-      { text: 'Trainyard', name: 'trainyard' },
-      { text: 'Nemo', name: 'aqui-nemo' }
-    ];
 
      /* var arScene = document.querySelector('ar-scene'); */
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
       videoElement = document.querySelector("#train-video");
-      videoElement.play();
-      videoElement.volume = 0.05;
       audioElement = document.querySelector("#narration");
-      audioElement.play();
-      train.emit('trainStart');
-		  content.emit('theaterGone');
 
       // get the menu element  - NEED TO REDO THIS BUTTON AS AN OBJECT
       var menu = document.getElementById('menu');
       var button = document.createElement('button');
-      button.textContent = "Play Video" ;
+      button.textContent = "Begin" ;
       menu.appendChild(button);
       button.addEventListener('click', function () {
           const videoElement = document.querySelector("#train-video");
           videoElement.play();
+          videoElement.volume = 0.05;
+          audioElement.play();
           train.emit('trainStart');
 		      content.emit('theaterGone');
       });
@@ -112,8 +105,7 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           this.el.addEventListener('click', function (evt) {
-            //arScene.sceneEl.emit('showpanorama', { name: panoramas[1].name });
-            this.setAttribute('visible', false);
+          this.setAttribute('visible', false);
             console.log('I was clicked at: ', evt.detail.intersection.point);
           });
           this.video_el = document.querySelector(this.video_selector);
