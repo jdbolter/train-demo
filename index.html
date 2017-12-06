@@ -38,8 +38,16 @@
         <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
         <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
       </a-assets>
+      <a-entity id="ambientLight" light="type: ambient; color: #BBB">
+        <a-animation
+        attribute="light.intensity"
+        dur="8000"
+         to=".3"
+         begin= "lightsDown"
+       ></a-animation> 
+      </a-entity>
+      <a-entity id="directionalLight" light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
 
-      <a-sky src="#trainyardPano"></a-sky>
 
       <!-- Using the asset management system. -->
       <a-entity id="train" visible="false" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="0 0 -10">
@@ -71,7 +79,7 @@
             begin= "theaterGone"
           ></a-animation> 
       </a-entity>
-	  
+      <a-sky src="#trainyardPano"></a-sky>
     </a-scene>
 
 
@@ -92,6 +100,7 @@
           videoElement.play();
           train.emit('trainStart');
 		      content.emit('theaterGone');
+          ambientLight.emit('lightsDown');
       });
 
       AFRAME.registerComponent('cursor-listener', {
