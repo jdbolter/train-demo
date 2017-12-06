@@ -9,8 +9,9 @@
   </head>
 
   <body>
-
+    <div id="BlackDiv">
     <div id="menu" class="menu"></div>
+    </div>
  <!-- <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  The version with the inspector slows everything down --> 
     <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
       
@@ -43,7 +44,7 @@
       <a-sky src="#trainyardPano"></a-sky>
 
       <!-- Using the asset management system. -->
-      <a-entity id="train" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="15 3 -50">
+      <a-entity id="train" visible="false" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="0 0 -10">
         <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
@@ -52,14 +53,20 @@
         <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <!-- Train animation -->
         <a-animation
-        id="trainAnimation"
+        attribute="visible"
+          id="theaterGone"
+         delay="12500"
+         to="true"
+         begin= "trainStart"
+       ></a-animation> 
+  <!--      <a-animation
         attribute="position"
          easing= "ease-out-expo"
-         delay="13000"
+         delay="12500"
          to="0 0 -10"
          begin="trainStart"
          dur="300"
-        ></a-animation>
+        ></a-animation>--> 
       </a-entity>
 
       <!--THe theater box itself goes invisible on the "theaterGone" signal --> 
