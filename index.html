@@ -12,14 +12,12 @@
     <div id="BlackDiv">
     <div id="menu" class="menu"></div>
     </div>
- <!-- <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  The version with the inspector slows everything down --> 
     <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
       
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
         <video id="train-video" src="assets/train-video.mp4" playsinline></video>   
-        <audio id="narration" src="assets/narration.m4a" ></audio> 
         <img id="trainyardPano" src="assets/malmo.jpg">
       </a-assets>
 
@@ -54,22 +52,13 @@
         <!-- Train animation -->
         <a-animation
         attribute="visible"
-          id="theaterGone"
-         delay="12500"
+         delay="60000"
          to="true"
          begin= "trainStart"
        ></a-animation> 
-  <!--      <a-animation
-        attribute="position"
-         easing= "ease-out-expo"
-         delay="12500"
-         to="0 0 -10"
-         begin="trainStart"
-         dur="300"
-        ></a-animation>--> 
-      </a-entity>
+        </a-entity>
 
-      <!--THe theater box itself goes invisible on the "theaterGone" signal --> 
+      <!--The theater box itself goes invisible on the "theaterGone" signal --> 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
@@ -77,7 +66,7 @@
 	    <a-animation
 		       attribute="visible"
          	  id="theaterGone"
-            delay="30000"
+            delay="114000"
 			      to="false"
             begin= "theaterGone"
           ></a-animation> 
@@ -93,9 +82,7 @@
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
       videoElement = document.querySelector("#train-video");
-      audioElement = document.querySelector("#narration");
 
-      // get the menu element  - NEED TO REDO THIS BUTTON AS AN OBJECT
       var menu = document.getElementById('menu');
       var button = document.createElement('button');
       button.textContent = "Begin" ;
@@ -103,8 +90,6 @@
       button.addEventListener('click', function () {
           const videoElement = document.querySelector("#train-video");
           videoElement.play();
-          videoElement.volume = 0.05;
-          audioElement.play();
           train.emit('trainStart');
 		      content.emit('theaterGone');
       });
