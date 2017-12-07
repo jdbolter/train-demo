@@ -9,16 +9,15 @@
   </head>
 
   <body>
-
+    <div id="BlackDiv">
     <div id="menu" class="menu"></div>
- <!-- <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  The version with the inspector slows everything down --> 
+    </div>
     <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
       
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
         <video id="train-video" src="assets/train-video.mp4" playsinline></video>   
-        <audio id="narration" src="assets/narration.m4a" ></audio> 
         <img id="trainyardPano" src="assets/malmo.jpg">
       </a-assets>
 
@@ -43,7 +42,7 @@
       <a-sky src="#trainyardPano"></a-sky>
 
       <!-- Using the asset management system. -->
-      <a-entity id="train" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="15 3 -50">
+      <a-entity id="train" visible="false" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="0 0 -10">
         <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
@@ -52,17 +51,14 @@
         <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <!-- Train animation -->
         <a-animation
-        id="trainAnimation"
-        attribute="position"
-         easing= "ease-out-expo"
-         delay="13000"
-         to="0 0 -10"
-         begin=""
-         dur="300"
-        ></a-animation>
-      </a-entity>
+        attribute="visible"
+         delay="60000"
+         to="true"
+         begin= "trainStart"
+       ></a-animation> 
+        </a-entity>
 
-      <!--THe theater box itself goes invisible on the "theaterGone" signal --> 
+      <!--The theater box itself goes invisible on the "theaterGone" signal --> 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
         <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
@@ -70,9 +66,9 @@
 	    <a-animation
 		       attribute="visible"
          	  id="theaterGone"
-            delay="30000"
+            delay="114000"
 			      to="false"
-            begin= ""
+            begin= "theaterGone"
           ></a-animation> 
       </a-entity>
 	  
@@ -81,26 +77,15 @@
 
 
     <script>
-    var panoramas = [
-      { text: 'Trainyard', name: 'trainyard' },
-      { text: 'Nemo', name: 'aqui-nemo' }
-    ];
 
      /* var arScene = document.querySelector('ar-scene'); */
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
       videoElement = document.querySelector("#train-video");
-      videoElement.play();
-      videoElement.volume = 0.05;
-      audioElement = document.querySelector("#narration");
-      audioElement.play();
-      train.emit('trainStart');
-		  content.emit('theaterGone');
 
-      // get the menu element  - NEED TO REDO THIS BUTTON AS AN OBJECT
       var menu = document.getElementById('menu');
       var button = document.createElement('button');
-      button.textContent = "Play Video" ;
+      button.textContent = "Begin" ;
       menu.appendChild(button);
       button.addEventListener('click', function () {
           const videoElement = document.querySelector("#train-video");
@@ -112,8 +97,7 @@
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           this.el.addEventListener('click', function (evt) {
-            //arScene.sceneEl.emit('showpanorama', { name: panoramas[1].name });
-            this.setAttribute('visible', false);
+          this.setAttribute('visible', false);
             console.log('I was clicked at: ', evt.detail.intersection.point);
           });
           this.video_el = document.querySelector(this.video_selector);

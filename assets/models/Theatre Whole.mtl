@@ -1,5 +1,5 @@
 # Blender MTL File: 'theatre.blend'
-# Material Count: 11
+# Material Count: 10
 
 newmtl 191B28FF
 Ns 96.078431
@@ -21,15 +21,38 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl Dark_red
+newmtl Material
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
-Kd 0.533333 0.000000 0.082353
-Ks 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.005000 0.005000 0.005000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
-illum 1
+illum 2
+map_Kd ../textures/chairDiffuseColor.png
+
+newmtl Material.001
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.005000 0.005000 0.005000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../textures/chairDiffuseColor.png
+
+newmtl Material.002
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.005000 0.005000 0.005000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd ../textures/chairDiffuseColor.png
 
 newmtl Red
 Ns 96.078431
@@ -51,39 +74,6 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl chair.005
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd chairDiffuseColor.png
-
-newmtl chair.006
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd chairDiffuseColor.png
-
-newmtl chair.007
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
-map_Kd chairDiffuseColor.png
-
 newmtl dark_grey
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
@@ -103,7 +93,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd floorDiffuseTexture.png
+map_Kd ../textures/floorDiffuseTexture.png
 
 newmtl wallDiffuseTexture
 Ns 96.078431
@@ -114,4 +104,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 1
-map_Kd wallDiffuseTexture.png
+map_Kd ../textures/wallDiffuseTexture.png
