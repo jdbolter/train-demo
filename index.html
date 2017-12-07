@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div id="BlackDiv">
+    <div id="BlackDiv"> 
     <div id="menu" class="menu"></div>
     </div>
     <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
@@ -41,10 +41,17 @@
       <a-entity id="ambientLight" light="type: ambient; color: #BBB">
         <a-animation
         attribute="light.intensity"
-        dur="8000"
-         to=".3"
+        dur="12000"
+         to=".05"
          begin= "lightsDown"
        ></a-animation> 
+       <!-- start timing animation to bring lights back uup -->
+       <a-animation
+       attribute="light.intensity"
+        delay="60000"
+        to="1"
+        begin= "lightsDown"
+      ></a-animation> 
       </a-entity>
       <a-entity id="directionalLight" light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
 
