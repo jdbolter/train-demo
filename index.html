@@ -72,6 +72,17 @@
           ></a-animation> 
       </a-entity>
 	  
+      <a-light id ="pointLight" type="point" intensity= "0.76"castShadow= "true"  position = "-21 33 40">
+        <a-animation
+        attribute="intensity"
+          id="lightsDown"
+          delay = 12000
+          dur = 5000
+          to="0.3"
+          begin= "lightsDown"
+       ></a-animation>
+      </a-light>
+	  
     </a-scene>
 
 
@@ -81,6 +92,7 @@
      /* var arScene = document.querySelector('ar-scene'); */
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
+      var lights = document.querySelector('#pointLight')
       videoElement = document.querySelector("#train-video");
 
       var menu = document.getElementById('menu');
@@ -92,23 +104,7 @@
           videoElement.play();
           train.emit('trainStart');
 		      content.emit('theaterGone');
-      });
-
-      AFRAME.registerComponent('cursor-listener', {
-        init: function () {
-          this.el.addEventListener('click', function (evt) {
-          this.setAttribute('visible', false);
-            console.log('I was clicked at: ', evt.detail.intersection.point);
-          });
-          this.video_el = document.querySelector(this.video_selector);
-          this.el.addEventListener('mouseenter', function (evt) {
-            this.setAttribute('material', 'opacity', 0.5);
-          });
-          this.el.addEventListener('mouseleave', function (evt) {
-            this.setAttribute('material', 'opacity', 1.0);
-
-          });
-        }
+          lights.emit('lightsDown')
       });
 
     </script>
