@@ -42,7 +42,7 @@
       <a-sky src="#trainyardPano"></a-sky>
 
       <!-- Using the asset management system. -->
-      <a-entity id="train" visible="false" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="0 0 -10">
+      <a-entity id="train" visible="true" shadow="cast: true, receive: true" rotation="4 -55 0" scale="1.5 1.5 1.5" position="40.53 0 -81.03">
         <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
@@ -51,16 +51,18 @@
         <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <!-- Train animation -->
         <a-animation
-        attribute="visible"
-         delay="60000"
-         to="true"
+        attribute="position"
+         delay="59000"
+         dur = "1200"
+         easing="linear"
+         to="4.32 -9 -42"
          begin= "trainStart"
        ></a-animation> 
         </a-entity>
 
       <!--The theater box itself goes invisible on the "theaterGone" signal --> 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
-        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
+        <a-obj-model src="#theater-obj" mtl="#theater-mtl" shadow="cast: true; receive: true" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
         <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
 	    <a-animation
@@ -71,8 +73,15 @@
             begin= "theaterGone"
           ></a-animation> 
       </a-entity>
-	  
-      <a-light id ="pointLight" type="point" intensity= "0.76"castShadow= "true"  position = "-21 33 40">
+    
+      
+      <!--Lights -->
+      <a-entity light = "type: point;
+                         intensity: 0.76;
+                         castShadow: true;
+                         shadowCameraVisible: true;"
+                          position="21 33 40"
+                          id = "pointLight">
         <a-animation
         attribute="intensity"
           id="lightsDown"
@@ -81,7 +90,7 @@
           to="0.3"
           begin= "lightsDown"
        ></a-animation>
-      </a-light>
+      </a-entity>
 	  
     </a-scene>
 
