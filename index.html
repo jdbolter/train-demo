@@ -12,7 +12,7 @@
     <div id="BlackDiv">
     <div id="menu" class="menu"></div>
     </div>
-    <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
+    <a-scene  light="defaultLightsEnabled: false" shadow="type: pcfsoft" inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
       
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
@@ -76,21 +76,69 @@
     
       
       <!--Lights -->
-      <a-entity light = "type: point;
-                         intensity: 0.76;
-                         castShadow: true;
-                         shadowCameraVisible: true;"
-                          position="21 33 40"
-                          id = "pointLight">
-        <a-animation
-        attribute="intensity"
-          id="lightsDown"
-          delay = 12000
-          dur = 5000
-          to="0.3"
-          begin= "lightsDown"
-       ></a-animation>
+      <a-entity light="shadowMapWidth:1024;
+                      shadowMapHeight:1024;
+                      shadowCameraNear:0.02;
+                      decay:0.8;
+                      distance:120;
+                      intensity:1.5;
+                      penumbra:0.36;
+                      type:spot;
+                      castShadow:true;
+                      shadowCameraFov:100;
+                      shadowCameraTop:50;
+                      shadowCameraRight:40;
+                      shadowCameraBottom:-40;
+                      shadowCameraLeft:-40"
+                      id=spotLight
+                      position="45 8.08 -50.51"
+                      data-aframe-default-light="true"
+                      aframe-injected="false"
+                      rotation="0 148.4 0">
+                          <a-animation
+                          attribute="light.intensity"
+                          id="spotLightsDown"
+                          delay = 12000
+                          dur = 7000
+                          to="0.2"
+                          begin= "spotLightsDown"
+                          ></a-animation>
+                          <a-animation
+                          attribute="light.intensity"
+                          id="spotLightsUp"
+                          delay = 60000
+                          dur = 3000
+                          to="1.5"
+                          begin= "spotLightsUp"
+                          ></a-animation>
       </a-entity>
+      <a-entity light="intensity:0.7;
+                      color:#BBB;
+                      type:ambient;"
+                      id="houseLight"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      scale="1 1 1"
+                      visible="true"
+                      data-aframe-default-light=""
+                      aframe-injected="">
+                        <a-animation
+                        attribute="light.intensity"
+                        id="houseLightsDown"
+                        delay = 12000
+                        dur = 7000
+                        to="0.3"
+                        begin= "houseLightsDown"
+                        ></a-animation><a-animation
+                        attribute="light.intensity"
+                        id="houseLightsUp"
+                        delay = 60000
+                        dur = 3000
+                        to="0.7"
+                        begin= "houseLightsUp"
+                        ></a-animation>
+      </a-entity>
+     
 	  
     </a-scene>
 
@@ -101,7 +149,8 @@
      /* var arScene = document.querySelector('ar-scene'); */
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
-      var lights = document.querySelector('#pointLight')
+      var spotLights = document.querySelector('#spotLight');
+      var houseLights = document.querySelector('#houseLight')
       videoElement = document.querySelector("#train-video");
 
       var menu = document.getElementById('menu');
@@ -113,7 +162,10 @@
           videoElement.play();
           train.emit('trainStart');
 		      content.emit('theaterGone');
-          lights.emit('lightsDown')
+          spotLights.emit('spotLightsDown');
+          spotLights.emit('spotLightsUp');
+          houseLights.emit('houseLightsDown');
+          houseLights.emit('houseLightsUp');
       });
 
     </script>
