@@ -98,10 +98,12 @@
             <a-animation attribute="material.opacity" delay="105000" dur= "5000" to= "0" begin= "chairsFadeOut"> </a-animation>          
         </a-entity> 
         <a-entity id ="people" obj-model="obj: #people-obj" material="src:#peopleMap; transparent: true; opacity: 1;" shadow="cast: true, receive: true" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
-            <a-animation attribute="material.opacity" delay="84000" dur= "5000" to= "0" begin= "peopleFadeOut"> </a-animation>   
+            <a-animation attribute="material.opacity" delay="105000" dur= "5000" to= "0" begin= "peopleFadeOut"> </a-animation>   
         </a-entity>
       
-        <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50" visible="true" opacity = "1">
+        <a-video id ="video" src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50" visible="false" opacity = "1">
+            <a-animation attribute="visible" id="makeVisible" delay="15000"to="true" begin= "makeVisible"></a-animation>
+            <a-animation attribute="opacity" id="fadeVideoOut" delay="105000"to="0" begin= "fadeVideoOut"></a-animation>
         </a-video>
 	    <a-animation
 		       attribute="visible"
@@ -194,8 +196,9 @@
       var spotLights = document.querySelector('#spotLight');
       var houseLights = document.querySelector('#houseLight')
       var stand = document.querySelector('#trainStand')
-      const videoElement = document.querySelector("#train-video");
-      
+      var videoElement = document.querySelector("#train-video");
+      var vidContainer = document.getElementById("#video");
+
 
       var menu = document.getElementById('menu');
       var button = document.createElement('button');
@@ -203,6 +206,7 @@
       menu.appendChild(button);
       button.addEventListener('click', function () {
           videoElement.play();
+          video.emit('makeVisible');
           train.emit('trainStart');
           train.emit('trainAR');
           stand.emit('standAppear');
@@ -215,6 +219,7 @@
           proscenium.emit('prosceniumFadeOut');
           chairs.emit('chairsFadeOut');
           people.emit('peopleFadeOut');
+          video.emit('fadeVideoOut');
       });
 
     </script>
