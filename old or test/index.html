@@ -1,0 +1,202 @@
+<html>
+  <head>
+    <title>Theater Disaster</title>
+    <meta name="description" content="Film, VR and AR">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+
+  </head>
+
+  <body>
+    <div id="BlackDiv"> 
+    <div id="menu" class="menu"></div>
+    </div>
+    <a-scene >  
+        
+      <a-assets>
+        <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
+        <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
+        <video id="train-video" src="assets/train-video.mp4" playsinline></video>   
+        <img id="trainyardPano" src="assets/malmo.jpg">
+      </a-assets>
+
+      <!--The Train model in parts -->
+      <a-assets>
+        <a-asset-item id="objectWheels" src="assets/models/trainWheels.obj"></a-asset-item>
+        <a-asset-item id="objectCab" src="assets/models/trainCab.obj"></a-asset-item>
+        <a-asset-item id="objectBase" src="assets/models/trainBase.obj"></a-asset-item>
+        <a-asset-item id="objectBoiler" src="assets/models/trainBoiler.obj"></a-asset-item>
+        <img id="wheelColor" src="assets/textures/WheelsCapTexture_baseColor.jpg" />
+        <img id="wheelBmp" src="assets/textures/WheelsCapTexture_normal.png" />
+        <img id="wheelAO" src="assets/textures/WheelsCapTexture_occ.jpg" />
+        <img id="lightsColor" src="assets/textures/lightsHubsTexture_baseColor.jpg" />
+        <img id="lightsBmp" src="assets/textures/lightsHubsTexture_normal.png" />
+        <img id="lightsAO" src="assets/textures/lightsHubsTexture_occ.jpg" />
+        <img id="boilerColor" src="assets/textures/boilerTexture_baseColor.jpg" />
+        <img id="boilerBmp" src="assets/textures/boilerTexture_normal.png" />
+        <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
+        <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
+      </a-assets>
+      <!--
+      <a-entity id="ambientLight" light="type: ambient; color: #BBB">
+        <a-animation
+        attribute="light.intensity"
+        dur="12000"
+         to=".05"
+         begin= "lightsDown"
+       ></a-animation> 
+       <a-animation
+       attribute="light.intensity"
+        delay="60000"
+        to="1"
+        begin= "lightsDown"
+      ></a-animation> -->
+
+      </a-entity>
+      <a-entity id="directionalLight" light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
+
+
+      <!-- Using the asset management system. -->
+      <a-entity id="train" visible="false" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="0 0 -10">
+        <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+        <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+
+        <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+
+        <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+        <!-- Train animation -->
+        <a-animation
+        attribute="visible"
+         delay="60000"
+         to="true"
+         begin= "trainStart"
+       ></a-animation> 
+        </a-entity>
+
+      <!--The theater box itself goes invisible on the "theaterGone" signal --> 
+      <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
+        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
+        </a-obj-model>
+        <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
+	    <a-animation
+		       attribute="visible"
+         	  id="theaterGone"
+            delay="108000"
+			      to="false"
+            begin= "theaterGone"
+          ></a-animation> 
+      </a-entity>
+     <!--Lights -->
+      <a-entity light="shadowMapWidth:1024;
+        shadowMapHeight:1024;
+        shadowCameraNear:0.02;
+        decay:0.8;
+        distance:120;
+        intensity:1.5;
+        penumbra:0.36;
+        type:spot;
+        castShadow:true;
+        shadowCameraFov:100;
+        shadowCameraTop:50;
+        shadowCameraRight:40;
+        shadowCameraBottom:-40;
+        shadowCameraLeft:-40"
+        id=spotLight
+        position="45 8.08 -50.51"
+        data-aframe-default-light="true"
+        aframe-injected="false"
+        rotation="0 148.4 0">
+            <a-animation
+            attribute="light.intensity"
+            id="spotLightsDown"
+            delay = 12000
+            dur = 7000
+            to="0.2"
+            begin= "spotLightsDown"
+            ></a-animation>
+            <a-animation
+            attribute="light.intensity"
+            id="spotLightsUp"
+            delay = 60000
+            dur = 3000
+            to="1.5"
+            begin= "spotLightsUp"
+            ></a-animation>
+        </a-entity>
+        <a-entity light="intensity:0.7;
+        color:#BBB;
+        type:ambient;"
+        id="houseLight"
+        position="0 0 0"
+        rotation="0 0 0"
+        scale="1 1 1"
+        visible="true"
+        data-aframe-default-light=""
+        aframe-injected="">
+          <a-animation
+          attribute="light.intensity"
+          id="houseLightsDown"
+          delay = 12000
+          dur = 7000
+          to="0.3"
+          begin= "houseLightsDown"
+          ></a-animation><a-animation
+          attribute="light.intensity"
+          id="houseLightsUp"
+          delay = 60000
+          dur = 3000
+          to="0.7"
+          begin= "houseLightsUp"
+          ></a-animation>
+
+      <a-entity camera look-controls></a-entity>
+      <a-sky src="#trainyardPano"></a-sky>
+    </a-scene>
+
+
+
+    <script>
+
+     /* var arScene = document.querySelector('ar-scene'); */
+      var train = document.querySelector("#train");
+      var content = document.querySelector('#theaterworld');
+      var spotLights = document.querySelector('#spotLight');
+      var houseLights = document.querySelector('#houseLight')
+      videoElement = document.querySelector("#train-video");
+
+      var menu = document.getElementById('menu');
+      var button = document.createElement('button');
+      button.textContent = "Begin" ;
+      menu.appendChild(button);
+      button.addEventListener('click', function () {
+          const videoElement = document.querySelector("#train-video");
+          videoElement.play();
+          train.emit('trainStart');
+		      content.emit('theaterGone');
+          spotLights.emit('spotLightsDown');
+          spotLights.emit('spotLightsUp');
+          houseLights.emit('houseLightsDown');
+          houseLights.emit('houseLightsUp');;
+      });
+
+      AFRAME.registerComponent('cursor-listener', {
+        init: function () {
+          this.el.addEventListener('click', function (evt) {
+          this.setAttribute('visible', false);
+            console.log('I was clicked at: ', evt.detail.intersection.point);
+          });
+          this.video_el = document.querySelector(this.video_selector);
+          this.el.addEventListener('mouseenter', function (evt) {
+            this.setAttribute('material', 'opacity', 0.5);
+          });
+          this.el.addEventListener('mouseleave', function (evt) {
+            this.setAttribute('material', 'opacity', 1.0);
+
+          });
+        }
+      });
+
+    </script>
+  </body>
+</html>

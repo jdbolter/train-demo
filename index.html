@@ -9,11 +9,11 @@
   </head>
 
   <body>
-    <div id="BlackDiv"> 
+    <div id="BlackDiv">
     <div id="menu" class="menu"></div>
     </div>
-    <a-scene >  
-        
+    <a-scene  light="defaultLightsEnabled: false" shadow="type: pcfsoft">  
+      
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
@@ -38,26 +38,9 @@
         <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
         <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
       </a-assets>
-      <a-entity id="ambientLight" light="type: ambient; color: #BBB">
-        <a-animation
-        attribute="light.intensity"
-        dur="12000"
-         to=".05"
-         begin= "lightsDown"
-       ></a-animation> 
-       <!-- start timing animation to bring lights back up -->
-       <a-animation
-       attribute="light.intensity"
-        delay="60000"
-        to="1"
-        begin= "lightsDown"
-      ></a-animation> 
-      </a-entity>
-      <a-entity id="directionalLight" light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
-
 
       <!-- Using the asset management system. -->
-      <a-entity id="train" visible="false" shadow="cast: true, receive: true" rotation="4 -45 0" scale="0.4 0.4 0.4" position="0 0 -10">
+      <a-entity id="train" visible="true" shadow="cast: true, receive: true" rotation="4 -55 0" scale="1.5 1.5 1.5" position="40.53 0 -81.03">
         <a-entity obj-model="obj: #objectWheels" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <a-entity obj-model="obj: #objectCab" material="src:#wheelColor; normalMap:#wheelBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #wheelAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
@@ -66,28 +49,95 @@
         <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
         <!-- Train animation -->
         <a-animation
-        attribute="visible"
-         delay="60000"
-         to="true"
+        attribute="position"
+         delay="59000"
+         dur = "1200"
+         easing="linear"
+         to="4.32 -9 -42"
          begin= "trainStart"
        ></a-animation> 
         </a-entity>
 
       <!--The theater box itself goes invisible on the "theaterGone" signal --> 
       <a-entity id="theaterworld" position="0 0 0" referenceframe='parent: ar.user; userotation: false'>
-        <a-obj-model src="#theater-obj" mtl="#theater-mtl" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
+        <a-obj-model src="#theater-obj" mtl="#theater-mtl" shadow="cast: true; receive: true" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
         </a-obj-model>
         <a-video src="#train-video" width="57.6" height="32.4" rotation="0 -30 0" position="35 7 -50"></a-video>
 	    <a-animation
 		       attribute="visible"
          	  id="theaterGone"
-            delay="108000"
+            delay="114000"
 			      to="false"
             begin= "theaterGone"
           ></a-animation> 
       </a-entity>
-      <a-entity camera look-controls></a-entity>
-      <a-sky src="#trainyardPano"></a-sky>
+    
+      
+      <!--Lights -->
+      <a-entity light="shadowMapWidth:1024;
+                      shadowMapHeight:1024;
+                      shadowCameraNear:0.02;
+                      decay:0.8;
+                      distance:120;
+                      intensity:1.5;
+                      penumbra:0.36;
+                      type:spot;
+                      castShadow:true;
+                      shadowCameraFov:100;
+                      shadowCameraTop:50;
+                      shadowCameraRight:40;
+                      shadowCameraBottom:-40;
+                      shadowCameraLeft:-40"
+                      id=spotLight
+                      position="45 8.08 -50.51"
+                      data-aframe-default-light="true"
+                      aframe-injected="false"
+                      rotation="0 148.4 0">
+                          <a-animation
+                          attribute="light.intensity"
+                          id="spotLightsDown"
+                          delay = 6000
+                          dur = 7000
+                          to="0.2"
+                          begin= "spotLightsDown"
+                          ></a-animation>
+                          <a-animation
+                          attribute="light.intensity"
+                          id="spotLightsUp"
+                          delay = 60000
+                          dur = 3000
+                          to="1.5"
+                          begin= "spotLightsUp"
+                          ></a-animation>
+      </a-entity>
+      <a-entity light="intensity:0.7;
+                      color:#BBB;
+                      type:ambient;"
+                      id="houseLight"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      scale="1 1 1"
+                      visible="true"
+                      data-aframe-default-light=""
+                      aframe-injected="">
+                        <a-animation
+                        attribute="light.intensity"
+                        id="houseLightsDown"
+                        delay = 6000
+                        dur = 7000
+                        to="0.3"
+                        begin= "houseLightsDown"
+                        ></a-animation><a-animation
+                        attribute="light.intensity"
+                        id="houseLightsUp"
+                        delay = 60000
+                        dur = 3000
+                        to="0.7"
+                        begin= "houseLightsUp"
+                        ></a-animation>
+      </a-entity>
+     
+      <a-sky src="#trainyardPano"></a-sky>	  
     </a-scene>
 
 
@@ -97,6 +147,8 @@
      /* var arScene = document.querySelector('ar-scene'); */
       var train = document.querySelector("#train");
       var content = document.querySelector('#theaterworld');
+      var spotLights = document.querySelector('#spotLight');
+      var houseLights = document.querySelector('#houseLight')
       videoElement = document.querySelector("#train-video");
 
       var menu = document.getElementById('menu');
@@ -108,9 +160,13 @@
           videoElement.play();
           train.emit('trainStart');
 		      content.emit('theaterGone');
-          ambientLight.emit('lightsDown');
+          spotLights.emit('spotLightsDown');
+          spotLights.emit('spotLightsUp');
+          houseLights.emit('houseLightsDown');
+          houseLights.emit('houseLightsUp');
       });
 
+  /*  Use this cursor listener eventually to select objects 
       AFRAME.registerComponent('cursor-listener', {
         init: function () {
           this.el.addEventListener('click', function (evt) {
@@ -123,11 +179,9 @@
           });
           this.el.addEventListener('mouseleave', function (evt) {
             this.setAttribute('material', 'opacity', 1.0);
-
           });
         }
-      });
-
+      }); */
     </script>
   </body>
 </html>
