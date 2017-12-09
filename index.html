@@ -21,7 +21,7 @@
         <a-asset-item id="proscenium-obj" src="assets/models/theatreProscenium.obj"></a-asset-item>
         <a-asset-item id="room-obj" src="assets/models/theatreRoom.obj"></a-asset-item>
         <video id="train-video" src="assets/train-video.mp4" playsinline></video>   
-        <img id="prosceniumMap" src="assets/textures/prosceniumDiffuseColor.png" />
+        <img id="prosceniumMap" src="assets/textures/prosceniumDiffuseColor.jpg" />
         <img id="roomMap" src="assets/textures/theatreRoomDiffuseColor.png" />
         <img id="chairMap" src="assets/textures/chairDiffuseColor.png" />
         <img id="peopleMap" src="assets/textures/peopleDiffuseColor.png" />
@@ -97,7 +97,7 @@
         <a-entity id ="room" obj-model="obj: #room-obj" material="src:#roomMap; transparent: true; opacity: 1;" shadow="cast: false, receive: true" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
             <a-animation attribute="material.opacity" delay="105000" dur= "5000" to= "0" begin= "roomFadeOut"> </a-animation>  
         </a-entity>
-        <a-entity id ="proscenium" obj-model="obj: #proscenium-obj" material="src:#prosceniumMap; transparent: true; opacity: 1;" shadow="cast: true, receive: true" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
+        <a-entity id ="proscenium" obj-model="obj: #proscenium-obj" material="src:#prosceniumMap; transparent: true; opacity: 1;" shadow="cast: true, receive: true" rotation="-90 -30 0" scale="1.040 1 1" position="6.810 -17 -5">
             <a-animation attribute="material.opacity" delay="105000" dur = "5000" to= "0"begin= "prosceniumFadeOut"></a-animation>      
         </a-entity>          
         <a-entity id ="chairs" obj-model="obj: #chairs-obj" material="src:#chairMap; transparent: true; opacity: 1;" shadow="cast: true, receive: true" rotation="-90 -30 0" scale="1 1 1" position="7 -17 -5">
