@@ -58,21 +58,27 @@
         <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
         <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
-        <a-entity id ="trainStand" obj-model="obj: #objectStand" material="src:#standMap; transparent: true; opacity: 0;" shadow="cast: false, receive: true" position = "0 2 0">
+        <a-entity id ="trainStand" obj-model="obj: #objectStand" material="src:#standMap; transparent: true; opacity: 0;" visible = "false" shadow="cast: false, receive: true" position = "0 2 0">
           <a-animation
             attribute="material.opacity"
-            delay="105000"
-            dur = "5000"
+            delay="108000"
+            dur = "2000"
             to="1"
             begin= "standAppear">
           </a-animation>
+          <a-animation
+          attribute="visible"
+          delay="108000"
+          to="true"
+          begin= "standVisible">
+        </a-animation>
         </a-entity>
         <!-- Train animation -->
         <a-animation
         attribute="position"
-         delay="59000"
+         delay="60000"
          dur = "1200"
-         easing="linear"
+         easing="ease-out"
          to="4.32 -9 -42"
          begin= "trainStart"
        ></a-animation>
@@ -152,7 +158,7 @@
                           begin= "spotLightsUp"
                           ></a-animation>
       </a-entity>
-      <a-entity light="intensity:0.7;
+      <a-entity light="intensity:1;
                       color:#BBB;
                       type:ambient;"
                       id="houseLight"
@@ -167,7 +173,7 @@
                         id="houseLightsDown"
                         delay = 12000
                         dur = 7000
-                        to="0.3"
+                        to="0.4"
                         begin= "houseLightsDown"
                         ></a-animation><a-animation
                         attribute="light.intensity"
@@ -210,6 +216,7 @@
           train.emit('trainStart');
           train.emit('trainAR');
           stand.emit('standAppear');
+          stand.emit('standVisible');
 		      content.emit('theaterGone');
           spotLights.emit('spotLightsDown');
           spotLights.emit('spotLightsUp');
