@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Theater Disaster</title>
-    <meta name="description" content="Panoramas and Cursors">
+    <meta name="description" content="Film, VR and AR">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
     <link rel="stylesheet" type="text/css" href="resources/style.css">
@@ -12,8 +12,8 @@
     <div id="BlackDiv"> 
     <div id="menu" class="menu"></div>
     </div>
-    <a-scene  inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">  
-      
+    <a-scene >  
+        
       <a-assets>
         <a-asset-item id="theater-obj" src="assets/models/Theatre Whole.obj"></a-asset-item>
         <a-asset-item id="theater-mtl" src="assets/models/Theatre Whole.mtl"></a-asset-item>
@@ -86,6 +86,7 @@
             begin= "theaterGone"
           ></a-animation> 
       </a-entity>
+      <a-entity camera look-controls></a-entity>
       <a-sky src="#trainyardPano"></a-sky>
     </a-scene>
 
