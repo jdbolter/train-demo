@@ -27,6 +27,7 @@
         <a-asset-item id="objectCab" src="assets/models/trainCab.obj"></a-asset-item>
         <a-asset-item id="objectBase" src="assets/models/trainBase.obj"></a-asset-item>
         <a-asset-item id="objectBoiler" src="assets/models/trainBoiler.obj"></a-asset-item>
+        <a-asset-item id="objectStand" src="assets/models/trainStand.obj"></a-asset-item>
         <img id="wheelColor" src="assets/textures/WheelsCapTexture_baseColor.jpg" />
         <img id="wheelBmp" src="assets/textures/WheelsCapTexture_normal.png" />
         <img id="wheelAO" src="assets/textures/WheelsCapTexture_occ.jpg" />
@@ -37,6 +38,7 @@
         <img id="boilerBmp" src="assets/textures/boilerTexture_normal.png" />
         <img id="boilerAO" src="assets/textures/boilerTexture_occ.jpg" />
         <img id="reflectMap" src="assets/textures/reflectSphere.jpg" />
+        <img id="standMap" src="assets/textures/trainStandDiffuseColor.png" />
       </a-assets>
 
       <a-sky src="#trainyardPano"></a-sky>
@@ -49,6 +51,15 @@
         <a-entity obj-model="obj: #objectBase" material="src:#lightsColor; normalMap:#lightsBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #lightsAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
 
         <a-entity obj-model="obj: #objectBoiler" material="src:#boilerColor; normalMap:#boilerBmp; roughness: 0.5; metalness: 0.8; ambientOcclusionMap: #boilerAO; ambientOcclusionMapIntensity: 1.0; sphericalEnvMap: #reflectMap" shadow="cast: true, receive: true"></a-entity>
+        <a-entity id ="trainStand" obj-model="obj: #objectStand" material="src:#standMap; transparent: true; opacity: 0;" shadow="cast: false, receive: true" position = "0 2 0">
+          <a-animation
+            attribute="material.opacity"
+            delay="105000"
+            dur = "5000"
+            to="1"
+            begin= "standAppear">
+          </a-animation>
+        </a-entity>
         <!-- Train animation -->
         <a-animation
         attribute="position"
@@ -57,7 +68,15 @@
          easing="linear"
          to="4.32 -9 -42"
          begin= "trainStart"
-       ></a-animation> 
+       ></a-animation>
+      <a-animation
+      attribute="rotation"
+       delay="105000"
+       dur = "5000"
+       to="4 0 0"
+       begin= "trainAR"
+     ></a-animation> 
+     
         </a-entity>
 
       <!--The theater box itself goes invisible on the "theaterGone" signal --> 
@@ -151,7 +170,9 @@
       var content = document.querySelector('#theaterworld');
       var spotLights = document.querySelector('#spotLight');
       var houseLights = document.querySelector('#houseLight')
+      var stand = document.querySelector('#trainStand')
       videoElement = document.querySelector("#train-video");
+      
 
       var menu = document.getElementById('menu');
       var button = document.createElement('button');
@@ -161,6 +182,8 @@
           const videoElement = document.querySelector("#train-video");
           videoElement.play();
           train.emit('trainStart');
+          train.emit('trainAR');
+          stand.emit('standAppear');
 		      content.emit('theaterGone');
           spotLights.emit('spotLightsDown');
           spotLights.emit('spotLightsUp');
