@@ -1,14 +1,28 @@
 function init() {
 	var scene = new THREE.Scene();
 	var stats = new Stats();
+	
+
+	var theatre;
+	var proscenium;
+	var chair;
+	var person;
+	var video;
+	var film = getFilm();
+	scene.add(film);
+	
+	
+
 	document.body.appendChild(stats.dom);
 
 	// Lights
-	var ambientLight = new THREE.AmbientLight('rgb(10,30,50)', 0.7);
-	var spotLight = getSpotLight(1.25);
-	spotLight.position.x = 50;
-	spotLight.position.y = 14;
-	spotLight.position.z = -6;
+	var ambientLight = new THREE.AmbientLight('rgb(255,255,255)', 0.3);
+	ambientLight.name = 'ambientLight';
+	var spotLight = getSpotLight(0.7);
+	spotLight.position.x = 0;
+	spotLight.position.y = -30;
+	spotLight.position.z = 0;
+	spotLight.name = 'spotLight';
 
 	scene.add(ambientLight);
 	scene.add(spotLight);
@@ -18,11 +32,15 @@ function init() {
 	var camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight, 1, 1000);
 	camera.position.z = 0;
 	camera.position.x = 0;
-	camera.position.y = 1;
+	camera.position.y = 55;
 	camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 	// load external geometry
+	
+	getTheatre();
+	getProscenium();
 	getChair();
+	
 
 	// renderer
 	var renderer = new THREE.WebGLRenderer();
@@ -44,9 +62,7 @@ function update(renderer, scene, camera, controls, stats) {
 	requestAnimationFrame(function() {
 		update(renderer, scene, camera, controls, stats);
 	});
-}
-
-
+} 
 
 function getSpotLight(intensity, color) {
 	color = color === undefined ? 'rgb(255, 255, 255)' : color;
@@ -60,53 +76,131 @@ function getSpotLight(intensity, color) {
 	return light;
 }
 
-function getChair(){
-	var loader = new THREE.OBJLoader();
+function getTheatre(){
 	var textureLoader = new THREE.TextureLoader();
-
-	loader.load('assets/models/theatreChair.obj', function (object) {
-	var colorMap = textureLoader.load('assets/textures/chairDiffuseColor.png');
-	var bumpMap = textureLoader.load('assets/textures/chairBumpTextures.png');
-	var faceMaterial = new THREE.MeshStandardMaterial('rgb(255,255,255)');
-
-	object.traverse(function(child) {
-		
-			child.material = faceMaterial;
-			faceMaterial.roughness = 1;
-			faceMaterial.map = colorMap;
-			faceMaterial.bumpMap = bumpMap;
-			faceMaterial.roughnessMap = bumpMap;
-			faceMaterial.metalness = 0;
-			faceMaterial.bumpScale = 0.1;
+	var loader = new THREE.OBJLoader();
+	loader.load('assets/models/theatreRoom.obj', function(object){
+		var colorMap = textureLoader.load('assets/textures/theatreRoomDiffuseColor.png');
+		var faceMaterial = new THREE.MeshStandardMaterial('rgb(255,255,255)');
+		//faceMaterial.side = THREE.DoubleSide;
+		faceMaterial.map = colorMap;
+		faceMaterial.bumpMap = colorMap;
+		faceMaterial.metalness = 0;
+		faceMaterial.bumpScale = 1;
+		object.traverse(function(child) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material = faceMaterial;
+			}
 	});
-	scene.add(object);
-});
+	window.theatre = object;
+	window.theatre.name = "theatre";
+	scene.add(window.theatre);
+	})
+};
+
+function getProscenium(){
+	var textureLoader = new THREE.TextureLoader();
+	var loader = new THREE.OBJLoader();
+	loader.load('assets/models/theatreProscenium.obj', function(object){
+		var colorMap = textureLoader.load('assets/textures/prosceniumDiffuseColor.png');
+		var faceMaterial = new THREE.MeshStandardMaterial('rgb(255,255,255)');
+		faceMaterial.side = THREE.DoubleSide;
+		faceMaterial.map = colorMap;
+		faceMaterial.bumpMap = colorMap;
+		faceMaterial.metalness = 0;
+		faceMaterial.bumpScale = 1;
+		object.traverse(function(child) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material = faceMaterial;
+			}
+	});
+	window.proscenium = object;
+	window.proscenium.name = "proscenium";
+	window.proscenium.rotation.x = Math.PI;
+	window.proscenium.position.z = 29;
+	window.proscenium.position.y = -17;
+	window.proscenium.scale.x = 0.95;
+	window.proscenium.scale.y = 0.95;
+	window.proscenium.scale.z = 0.98;
+	
+	scene.add(window.proscenium);
+	})
+};
+
+function getPerson(){
 }
+
+function getChair(){
+	var textureLoader = new THREE.TextureLoader();
+	var loader = new THREE.OBJLoader();
+	loader.load('assets/models/theatreChair.obj', function(object){
+		var colorMap = textureLoader.load('assets/textures/chairDiffuseColor.png');
+		var bumpMap = textureLoader.load('assets/textures/chairBumpTexture.png');
+		var faceMaterial = new THREE.MeshStandardMaterial('rgb(255,255,255)');
+		faceMaterial.map = colorMap;
+		faceMaterial.bumpMap = bumpMap;
+		faceMaterial.bumpScale = 0.01;
+		object.traverse(function(child) {
+			if ( child instanceof THREE.Mesh ) {
+				child.material = faceMaterial;
+			}
+	});
+	window.chair = object;
+	window.chair.name = "chair";
+	scene.add(window.chair);
+	getChairGrid(8, 1.1);
+	})
+};
 
 function getChairGrid(amount, seperationMultiplier){
-    var group = new THREE.Group();
+	var chair = window.chair;
+	var group = new THREE.Group();
+	group.name = "chairGroup";
 
     for (var i=0; i<amount; i++) {
-        var obj = getChair();
+		var obj = chair.clone();
         obj.position.x = i * seperationMultiplier;
-        obj.position.y = obj.geometry.parameters.height/2;
+		obj.position.y = obj.height/2;
+		obj.name = 'chair_' + i + '_0';
         group.add(obj);
         for (var j = 1; j<amount; j++){
-            var obj = getChair();
+            var obj = chair.clone();
             obj.position.x = i * seperationMultiplier;
-            obj.position.y = obj.geometry.parameters.height/2;
-            obj.position.z = j * seperationMultiplier;
+            obj.position.y = obj.height/2;
+			obj.position.z = j * seperationMultiplier;
+			obj.name = 'chair_' + i + '_'+j;
             group.add(obj);
 
-        }
+		}
+		
     }
 
-    group.position.x = -(seperationMultiplier * (amount-1))/2;
-    group.position.z = -(seperationMultiplier * (amount-1))/2;
+    group.position.x = 0;
+    group.position.z = 0;
 
-    return group;
+    scene.add(group);
+}
+//video
+
+	
+function getFilm(){
+	var video = document.createElement('video');
+	document.body.appendChild(video);
+	video.src = 'assets/train-video.mp4';
+	video.load();
+	video.play();
+	var texture = new THREE.VideoTexture(video);
+	var geometry = new THREE.PlaneGeometry(50,40,1,1);
+	var material = new THREE.MeshBasicMaterial({color: 'rgb(120,120,120)',side: THREE.DoubleSide});
+	material.map = texture;
+	var plane = new THREE.Mesh(geometry, material);
+	plane.position.y = -73;
+	plane.position.z = 7;
+	plane.rotation.x = -(Math.PI/2);
+	return plane;
 }
 
+	
 
 
 var scene = init();
