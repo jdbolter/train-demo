@@ -12,21 +12,27 @@
     <script src="https://aframe.io/releases/0.6.1/aframe.js"></script>    
     <script src="https://rawgit.com/argonjs/argon/develop/dist/argon.js"></script>
     <script src="build.js"></script>
-    <!--script src="{{ site.samples }}/resources/lib/CSS3DArgonRenderer.js"></script-->
-    <!-- <script src="{{ site.samples }}/resources/lib/CSS3DArgonHUD.js"></script> -->
+    <script src="https://samples-develop.argonjs.io/resources/lib/CSS3DArgonRenderer.js"></script>  
+    <script src="https://samples-develop.argonjs.io/resources/lib/CSS3DArgonHUD.js"></script>  
     <script src="../resources/js/aframe-look-at-component.js"></script>
     <script>
-      AFRAME.registerComponent('launchMe', {
+      AFRAME.registerComponent('launchme', {
         init: function () {
-          console.log("Initializing launchMe");
+          console.log("Initializing launchme");
+          this.el.addEventListener('referenceframe-statuschanged',function(){
+            console.log('launchme: reference frame changed');
+            window.location.href="https://joshuacrisp.com/book-demos/index.html";
+          })
         },
         update: function () {
-            console.log("Updating launchMe");
-            if (this.visible == 1){
-              window.location.href="https://joshuacrisp.com/book-demos/index.html";
-            }
+            console.log("Updating launchme");
         },
-        tick: function () {},
+        tick: function () {
+           /* if (this.el.style.visibility == "true") {
+              window.location.href="https://joshuacrisp.com/book-demos/index.html";
+              console.log("entity is visible");
+            }*/
+        },
 
       });
     </script>
@@ -36,8 +42,8 @@
       <div id="lookattarget" class="bottomScreen">Look at the La-Ciotat theatre ...</div>
     </div>  
 
-    <ar-scene vuforiakey="#vuforiakey"
-              vuforiadataset__stonesandchips="src:url(../resources/datasets/StonesAndChips.xml);">
+    <ar-scene vuforiakey="#myvuforiakey"
+              vuforiadataset__arinar="src:url(ARinAR/ARinAR.xml);">
       <div id="loader-wrapper">
         <div class="splashtext">
           <h1>AFrame + Argon + Vuforia</h1>
@@ -49,11 +55,11 @@
         <div class="loader-section section-right"></div>
       </div>
       <a-assets>
-        <a-asset-item id="vuforiakey" src="key.txt"></a-asset-item>
+        <a-asset-item id="myvuforiakey" src="key.txt"></a-asset-item>
       </a-assets>
 
       <!-- attach to stones target. x/y in the plane, z up -->
-      <ar-frame id="frame" trackvisibility="true" visible="false" launchMe parent="vuforia.stonesandchips.stones" position="0 0 0" rotation="0 0 0">
+      <ar-frame id="frame" trackvisibility="true" visible="false" launchme parent="vuforia.arinar.ciotatimage" position="0 0 0" rotation="0 0 0">
        <a-entity id="content">
        </a-entity>
       </ar-frame>      
